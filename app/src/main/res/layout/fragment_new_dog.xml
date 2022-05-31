@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_dogName_input_newDog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/et_dogName_input_newDog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter dog name" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_favTreat_input_newDog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_dogName_input_newDog">
+
+        <EditText
+            android:id="@+id/et_favTreat_input_newDog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter favorite treat" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_walkDate_input_newDog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_favTreat_input_newDog">
+
+        <EditText
+            android:id="@+id/et_walkDate_input_newDog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter walk date" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_bonus_input_newDog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_walkDate_input_newDog">
+
+        <EditText
+            android:id="@+id/et_bonus_input_newDog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter bonus" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <ImageView
+        android:id="@+id/iv_dog_picture_newDog"
+        android:scaleType="center"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_bonus_input_newDog"
+        />
+    <Button
+        android:id="@+id/b_newDogPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_dog_picture_newDog" />
+    <Button
+        android:id="@+id/b_newDog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Post"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/b_newDogPicture" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
