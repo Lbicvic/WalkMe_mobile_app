@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "150334993489",
+    "project_id": "walkmemobileapp",
+    "storage_bucket": "walkmemobileapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150334993489:android:73cbcd4f996d91d18cf470",
+        "android_client_info": {
+          "package_name": "com.myapp.walkme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150334993489-541s8q4het3fmjpjafrut5qp4m5b7278.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTJTakQ8wb3cd0OZgoN8OQXPM7ESt3rs8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150334993489-541s8q4het3fmjpjafrut5qp4m5b7278.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
