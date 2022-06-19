@@ -49,12 +49,21 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
+    <TextView
+        android:id="@+id/tv_dog_contact_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dog_bonus_details"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
     <Button
         android:id="@+id/location_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View Location"
-        app:layout_constraintTop_toBottomOf="@+id/tv_dog_bonus_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dog_contact_details"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />

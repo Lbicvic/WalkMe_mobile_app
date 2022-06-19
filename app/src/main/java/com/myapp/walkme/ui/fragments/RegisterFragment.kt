@@ -46,17 +46,18 @@ class RegisterFragment: Fragment() {
                             }
                         }
                     updateUI(user)
+                    val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
+                    findNavController().navigate(action)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    val baseContext = null
-                    Toast.makeText(baseContext, "Authentication failed.",
+
+                    Toast.makeText(context, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
                     updateUI(null)
                 }
             }
-        val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
-        findNavController().navigate(action)
+
     }
 
     private fun updateUI(user: FirebaseUser?) {

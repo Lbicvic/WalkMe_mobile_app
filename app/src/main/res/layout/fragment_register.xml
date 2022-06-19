@@ -15,7 +15,7 @@
             android:id="@+id/et_firstname_input_register"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="enter first name" />
+            android:hint="Enter first name" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_lastname_input_register"
@@ -29,7 +29,7 @@
             android:id="@+id/et_lastname_input_register"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="enter last name" />
+            android:hint="Enter last name" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -44,7 +44,7 @@
             android:id="@+id/et_email_input_register"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="enter email" />
+            android:hint="Enter email" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -59,7 +59,7 @@
             android:id="@+id/et_password_input_register"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="enter password" />
+            android:hint="Enter password" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

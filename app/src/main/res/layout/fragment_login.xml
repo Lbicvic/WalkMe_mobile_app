@@ -15,7 +15,7 @@
             android:id="@+id/et_email_input_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="enter email" />
+            android:hint="Enter email" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -30,7 +30,7 @@
             android:id="@+id/et_password_input_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="enter password" />
+            android:hint="Enter password" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
