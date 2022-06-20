@@ -32,7 +32,6 @@ class NewDogFragment: Fragment() {
         val currentUser = auth.currentUser
         if(currentUser != null){
             val dog = hashMapOf(
-                "imgSource" to binding.ivDogPictureNewDog.drawableState.toString(),
                 "name" to binding.etDogNameInputNewDog.text.toString(),
                 "favoriteTreat" to binding.etFavTreatInputNewDog.text.toString(),
                 "walkDate" to binding.etWalkDateInputNewDog.text.toString(),
