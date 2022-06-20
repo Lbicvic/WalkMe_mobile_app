@@ -1,6 +1,7 @@
 package com.myapp.walkme.ui.fragments
 
 import android.content.ContentValues.TAG
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
@@ -42,7 +43,7 @@ class DogAdapter : RecyclerView.Adapter<DogViewHolder>(){
 
 class DogViewHolder( val binding: ItemDogBinding) : RecyclerView.ViewHolder(binding.root){
     fun bind(dog : Dog){
-        //binding.itemDogImage.setImageURI(Uri.parse(dog.imgSrc))
+        binding.itemDogImage.setImageURI(Uri.parse(dog.imageSrc))
         binding.itemDogName.text="Name: ${dog.name}"
         binding.itemDogFavTreat.text = "Favorite treat: ${dog.favTreat}"
         binding.itemDogWalkDate.text = "Walk date: ${dog.walkDate}"

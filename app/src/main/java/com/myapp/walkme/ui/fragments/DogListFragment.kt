@@ -47,7 +47,7 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
 
                 if (snapshot != null) {
                     snapshot.documents.forEachIndexed { index, document ->
-                        val doggo = Dog(
+                        val doggo = Dog( document.data?.getValue("imageSrc").toString(),
                             document.data?.getValue("name").toString(),
                             document.data?.getValue("favoriteTreat").toString(),
                             document.data?.getValue("walkDate").toString(),
