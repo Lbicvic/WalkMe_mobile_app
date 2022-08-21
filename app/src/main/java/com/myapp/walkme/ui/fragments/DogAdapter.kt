@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.myapp.walkme.R
@@ -43,7 +44,7 @@ class DogAdapter : RecyclerView.Adapter<DogViewHolder>(){
 
 class DogViewHolder( val binding: ItemDogBinding) : RecyclerView.ViewHolder(binding.root){
     fun bind(dog : Dog){
-        binding.itemDogImage.setImageURI(Uri.parse(dog.imageSrc))
+        Glide.with(binding.root.context).load(Uri.parse(dog.imageSrc)).into(binding.itemDogImage)
         binding.itemDogName.text="Name: ${dog.name}"
         binding.itemDogFavTreat.text = "Favorite treat: ${dog.favTreat}"
         binding.itemDogWalkDate.text = "Walk date: ${dog.walkDate}"

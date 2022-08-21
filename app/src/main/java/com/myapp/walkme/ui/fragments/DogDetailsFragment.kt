@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.myapp.walkme.databinding.FragmentDogDetailsBinding
@@ -47,7 +48,7 @@ class DogDetailsFragment: Fragment() {
                 }
 
                 if (snapshot != null) {
-                        binding.ivDogPictureDetails.setImageURI(Uri.parse(snapshot.documents[args.position.toInt()].data?.getValue("imageSrc").toString()))
+                    Glide.with(binding.root.context).load(Uri.parse(snapshot.documents[args.position.toInt()].data?.getValue("imageSrc").toString())).into(binding.ivDogPictureDetails)
                         binding.tvDogNameDetails.text ="Name: ${snapshot.documents[args.position.toInt()].data?.getValue("name").toString()}"
                         binding.tvDogFavTreatDetails.text = "Favorite treat: ${snapshot.documents[args.position.toInt()].data?.getValue("favoriteTreat").toString()}"
                         binding.tvDogWalkDateDetails.text = "Walk date: ${snapshot.documents[args.position.toInt()].data?.getValue("walkDate").toString()}"
