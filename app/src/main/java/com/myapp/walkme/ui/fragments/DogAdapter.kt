@@ -48,7 +48,7 @@ class DogViewHolder( val binding: ItemDogBinding) : RecyclerView.ViewHolder(bind
         binding.itemDogName.text="Name: ${dog.name}"
         binding.itemDogFavTreat.text = "Favorite treat: ${dog.favTreat}"
         binding.itemDogWalkDate.text = "Walk date: ${dog.walkDate}"
-        binding.itemDogBonus.text = "Bonus: ${dog.bonus}"
+        binding.itemDogOwner.text = "Owner: ${dog.owner}"
         binding.itemDogContact.text = "Contact: ${dog.contact}"
     }
 }

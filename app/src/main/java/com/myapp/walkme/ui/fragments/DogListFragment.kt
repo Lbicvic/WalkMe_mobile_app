@@ -51,7 +51,7 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
                             document.data?.getValue("name").toString(),
                             document.data?.getValue("favoriteTreat").toString(),
                             document.data?.getValue("walkDate").toString(),
-                            document.data?.getValue("bonus").toString(),
+                            document.data?.getValue("owner").toString(),
                             document.data?.getValue("contact").toString()
                         )
                         adapter.addDogs(doggo)

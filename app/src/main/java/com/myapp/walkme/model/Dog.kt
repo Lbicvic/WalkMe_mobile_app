@@ -7,6 +7,6 @@ data class Dog(
     val name: String,
     val favTreat: String,
     val walkDate: String,
-    val bonus: String,
+    val owner: String,
     val contact: String
 )

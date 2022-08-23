@@ -41,10 +41,10 @@
         app:layout_constraintRight_toRightOf="parent"
         />
     <TextView
-        android:id="@+id/tv_dog_bonus_details"
+        android:id="@+id/tv_dog_owner_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bonus"
+        android:text="Owner"
         app:layout_constraintTop_toBottomOf="@+id/tv_dog_walk_date_details"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Contact"
-        app:layout_constraintTop_toBottomOf="@+id/tv_dog_bonus_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dog_owner_details"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />

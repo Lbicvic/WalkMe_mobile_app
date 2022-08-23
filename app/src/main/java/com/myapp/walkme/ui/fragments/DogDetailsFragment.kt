@@ -52,7 +52,7 @@ class DogDetailsFragment: Fragment() {
                         binding.tvDogNameDetails.text ="Name: ${snapshot.documents[args.position.toInt()].data?.getValue("name").toString()}"
                         binding.tvDogFavTreatDetails.text = "Favorite treat: ${snapshot.documents[args.position.toInt()].data?.getValue("favoriteTreat").toString()}"
                         binding.tvDogWalkDateDetails.text = "Walk date: ${snapshot.documents[args.position.toInt()].data?.getValue("walkDate").toString()}"
-                        binding.tvDogBonusDetails.text = "Bonus: ${snapshot.documents[args.position.toInt()].data?.getValue("bonus").toString()}"
+                        binding.tvDogOwnerDetails.text = "Owner: ${snapshot.documents[args.position.toInt()].data?.getValue("owner").toString()}"
                         binding.tvDogContactDetails.text = "Contact: ${snapshot.documents[args.position.toInt()].data?.getValue("contact").toString()}"
                 } else {
                     Log.d(ContentValues.TAG, "Current data: null")

@@ -48,26 +48,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_bonus_input_newDog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_walkDate_input_newDog">
-
-        <EditText
-            android:id="@+id/et_bonus_input_newDog"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Enter bonus" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_contact_input_newDog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_bonus_input_newDog">
+        app:layout_constraintTop_toBottomOf="@id/til_walkDate_input_newDog">
 
         <EditText
             android:id="@+id/et_contact_input_newDog"

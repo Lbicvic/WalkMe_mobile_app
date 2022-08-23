@@ -103,7 +103,7 @@ class NewDogFragment: Fragment() {
                 "name" to binding.etDogNameInputNewDog.text.toString(),
                 "favoriteTreat" to binding.etFavTreatInputNewDog.text.toString(),
                 "walkDate" to binding.etWalkDateInputNewDog.text.toString(),
-                "bonus" to binding.etBonusInputNewDog.text.toString(),
+                "owner" to currentUser.displayName,
                 "contact" to binding.etContactInputNewDog.text.toString(),
                 "imageSrc" to downloadUri
             )
