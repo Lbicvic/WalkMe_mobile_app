@@ -29,13 +29,13 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
         binding = FragmentDogListBinding.inflate(layoutInflater)
         db = FirebaseFirestore.getInstance()
         auth= FirebaseAuth.getInstance()
+        setupRecyclerView()
         binding.addPostBtn.setOnClickListener { showNewDogFragment() }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
         val currentUser = auth.currentUser
         if(currentUser != null){
             Log.d(TAG, "onViewCreated: RADI")
@@ -47,6 +47,7 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
                 }
 
                 if (snapshot != null) {
+                    dogs.clear()
                     snapshot.documents.forEachIndexed { index, document ->
                         val doggo = Dog( document.data?.getValue("imageSrc").toString(),
                             document.data?.getValue("name").toString(),
