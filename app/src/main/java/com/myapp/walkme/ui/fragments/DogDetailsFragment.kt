@@ -23,6 +23,8 @@ class DogDetailsFragment: Fragment() {
     lateinit var auth: FirebaseAuth
     lateinit var db: FirebaseFirestore
     private val args: DogDetailsFragmentArgs by navArgs()
+    var lng : String = ""
+    var lat : String = ""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,6 +56,8 @@ class DogDetailsFragment: Fragment() {
                         binding.tvDogWalkDateDetails.text = "Walk date: ${snapshot.documents[args.position.toInt()].data?.getValue("walkDate").toString()}"
                         binding.tvDogOwnerDetails.text = "Owner: ${snapshot.documents[args.position.toInt()].data?.getValue("owner").toString()}"
                         binding.tvDogContactDetails.text = "Contact: ${snapshot.documents[args.position.toInt()].data?.getValue("contact").toString()}"
+                        lat = snapshot.documents[args.position.toInt()].data?.getValue("latitude").toString()
+                        lng = snapshot.documents[args.position.toInt()].data?.getValue("longitude").toString()
                 } else {
                     Log.d(ContentValues.TAG, "Current data: null")
                 }
@@ -61,7 +65,7 @@ class DogDetailsFragment: Fragment() {
         }
     }
     private fun showMapFragment() {
-        val action = DogDetailsFragmentDirections.actionDogDetailsFragmentToMapFragment()
+        val action = DogDetailsFragmentDirections.actionDogDetailsFragmentToMapFragment(lat,lng)
         findNavController().navigate(action)
     }
 }

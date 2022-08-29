@@ -1,6 +1,6 @@
 package com.myapp.walkme.ui.fragments
 
-import android.content.ContentValues
+
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +20,7 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
     lateinit var adapter: DogAdapter
     lateinit var auth: FirebaseAuth
     lateinit var db: FirebaseFirestore
+    var dogs = mutableListOf<Dog>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,13 +29,13 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
         binding = FragmentDogListBinding.inflate(layoutInflater)
         db = FirebaseFirestore.getInstance()
         auth= FirebaseAuth.getInstance()
-        setupRecyclerView()
         binding.addPostBtn.setOnClickListener { showNewDogFragment() }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
         val currentUser = auth.currentUser
         if(currentUser != null){
             Log.d(TAG, "onViewCreated: RADI")
@@ -54,7 +55,8 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
                             document.data?.getValue("owner").toString(),
                             document.data?.getValue("contact").toString()
                         )
-                        adapter.addDogs(doggo)
+                        dogs.add(doggo)
+                        adapter.addDogs(dogs)
                     }
                 } else {
                     Log.d(TAG, "Current data: null")

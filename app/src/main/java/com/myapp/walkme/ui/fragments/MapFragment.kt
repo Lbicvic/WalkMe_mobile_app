@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -16,6 +17,7 @@ import com.myapp.walkme.databinding.FragmentMapBinding
 
 class MapFragment: Fragment(), OnMapReadyCallback {
     lateinit var binding: FragmentMapBinding
+    private val args: MapFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,7 +31,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        val currentPosition = LatLng(45.55111, 18.69389)
+        val currentPosition = LatLng(args.latitude.toDouble(), args.longitude.toDouble())
         googleMap.addMarker(
             MarkerOptions()
                 .position(currentPosition)

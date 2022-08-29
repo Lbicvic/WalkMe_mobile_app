@@ -77,5 +77,11 @@
         <action
             android:id="@+id/action_mapFragment_to_dogDetailsFragment"
             app:destination="@id/dogDetailsFragment" />
+        <argument
+            android:name="latitude"
+            app:argType="string" />
+        <argument
+            android:name="longitude"
+            app:argType="string" />
     </fragment>
 </navigation>

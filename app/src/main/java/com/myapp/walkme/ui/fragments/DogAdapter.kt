@@ -22,12 +22,12 @@ class DogAdapter : RecyclerView.Adapter<DogViewHolder>(){
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_dog,parent,false)
         return DogViewHolder(ItemDogBinding.bind(view))
     }
-    fun addDogs(dog : Dog){
-        dogs.add(dog)
+    fun addDogs(dog : MutableList<Dog>){
+        dogs.clear()
+        dogs.addAll(dog)
         notifyDataSetChanged()
     }
     override fun onBindViewHolder(holder: DogViewHolder, position: Int) {
-        //TODO Popraviti ucitavanje podataka sa firebasea
         val dog = dogs[position]
         holder.bind(dog)
         onDogSelectedListener?.let { listener ->
