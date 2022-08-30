@@ -29,6 +29,14 @@ class RegisterFragment: Fragment() {
         return binding.root
     }
     private fun showLoginFragment() {
+        if(binding.tilPasswordInputRegister.editText?.text.isNullOrEmpty() ||
+            binding.tilConfirmPasswordInputRegister.editText?.text.isNullOrEmpty() ||
+            binding.tilPasswordInputRegister.editText?.text.toString() != binding.tilConfirmPasswordInputRegister.editText?.text.toString() ||
+            binding.etEmailInputRegister.text.toString().isNullOrEmpty() || binding.etFirstnameInputRegister.text.toString().isNullOrEmpty() ||
+            binding.etLastnameInputRegister.text.toString().isNullOrEmpty()
+        ){
+            return
+        }
         auth.createUserWithEmailAndPassword(binding.etEmailInputRegister.text.toString(), binding.etPasswordInputRegister.text.toString())
             .addOnCompleteListener() { task ->
                 if (task.isSuccessful) {

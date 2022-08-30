@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.myapp.walkme.databinding.FragmentDogDetailsBinding
 import com.myapp.walkme.model.Dog
 
@@ -42,7 +43,7 @@ class DogDetailsFragment: Fragment() {
         val currentUser = auth.currentUser
         if(currentUser != null){
             Log.d(ContentValues.TAG, "onViewCreated: RADI")
-            val docRef = db.collection("dogs").orderBy("name")
+            val docRef = db.collection("dogs").orderBy("timestamp", Query.Direction.DESCENDING)
             docRef.addSnapshotListener { snapshot, e ->
                 if (e != null) {
                     Log.w(ContentValues.TAG, "Listen failed.", e)

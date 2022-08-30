@@ -61,13 +61,26 @@
             android:layout_height="match_parent"
             android:hint="Enter password" />
     </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_confirm_password_input_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_password_input_register">
 
+        <EditText
+            android:id="@+id/et_confirm_password_input_register"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Confirm password" />
+    </com.google.android.material.textfield.TextInputLayout>
     <Button
         android:id="@+id/b_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_password_input_register" />
+        app:layout_constraintTop_toBottomOf="@id/til_confirm_password_input_register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,6 +28,9 @@ class LoginFragment: Fragment() {
         return binding.root
     }
     private fun showDogListFragment() {
+        if(binding.etEmailInputLogin.text.toString().isEmpty() || binding.etPasswordInputLogin.text.toString().isEmpty() ){
+            return
+        }
         auth.signInWithEmailAndPassword(binding.etEmailInputLogin.text.toString(), binding.etPasswordInputLogin.text.toString())
             .addOnCompleteListener() { task ->
                 if (task.isSuccessful) {

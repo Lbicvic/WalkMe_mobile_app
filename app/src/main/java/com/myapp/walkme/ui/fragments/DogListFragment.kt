@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.myapp.walkme.databinding.FragmentDogListBinding
 import com.myapp.walkme.model.Dog
 
@@ -39,7 +40,8 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
         val currentUser = auth.currentUser
         if(currentUser != null){
             Log.d(TAG, "onViewCreated: RADI")
-            val docRef = db.collection("dogs").orderBy("name")
+            val docRef = db.collection("dogs").orderBy("timestamp", Query.Direction.DESCENDING)
+
             docRef.addSnapshotListener { snapshot, e ->
                 if (e != null) {
                     Log.w(TAG, "Listen failed.", e)
