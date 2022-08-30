@@ -10,10 +10,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.telephony.PhoneNumberUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -26,7 +29,6 @@ import com.myapp.walkme.databinding.FragmentNewDogBinding
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
-
 
 
 class NewDogFragment: Fragment() {
@@ -63,16 +65,12 @@ class NewDogFragment: Fragment() {
         val imagesRef = storageRef.getReference("images/"+ UUID.randomUUID().toString())
         var uploadTask = imagesRef.putFile(imageUri)
 
-// Register observers to listen for when the download is done or if it fails
         uploadTask.addOnFailureListener {
-            // Handle unsuccessful uploads
             if(progressDialog.isShowing){
                 progressDialog.dismiss()
             }
             Log.w(TAG, "Upload failed!!!")
         }.addOnSuccessListener { taskSnapshot ->
-            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-            // ...
             if(progressDialog.isShowing){
                 progressDialog.dismiss()
             }
@@ -114,7 +112,17 @@ class NewDogFragment: Fragment() {
         val currentUser = auth.currentUser
         var dog: HashMap<String, Comparable<*>?> = hashMapOf()
         if(currentUser != null){
-            if(this::downloadUri.isInitialized.not() || binding.etDogNameInputNewDog.text.toString().isNullOrEmpty() || binding.etFavTreatInputNewDog.text.toString().isNullOrEmpty() || binding.etWalkDateInputNewDog.text.toString().isNullOrEmpty() || binding.etContactInputNewDog.text.toString().isNullOrEmpty()){
+            if( PhoneNumberUtils.formatNumberToE164(binding.etContactInputNewDog.text.toString(),"HR") == null){
+                Toast.makeText(context, "Invalid Phone Number", Toast.LENGTH_SHORT).show()
+                return
+            }
+            val phoneNumber : String = PhoneNumberUtils.formatNumberToE164(binding.etContactInputNewDog.text.toString(),"HR")
+            if(this::downloadUri.isInitialized.not() || binding.etDogNameInputNewDog.text.toString().isNullOrEmpty() || binding.etFavTreatInputNewDog.text.toString().isNullOrEmpty()  || binding.etWalkDateInputNewDog.text.toString().isNullOrEmpty() || binding.etContactInputNewDog.text.toString().isNullOrEmpty()){
+                Toast.makeText(context, "Must fill empty input fields and add/upload picture", Toast.LENGTH_SHORT).show()
+                return
+            }
+            if(PhoneNumberUtils.isGlobalPhoneNumber(binding.etContactInputNewDog.text.toString()).not()){
+                Toast.makeText(context, "Invalid Global Phone Number", Toast.LENGTH_SHORT).show()
                 return
             }
             if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -124,13 +132,12 @@ class NewDogFragment: Fragment() {
             fusedLocationProviderClient.lastLocation.addOnSuccessListener {
                 Log.w(TAG, "${it.latitude} and ${it.longitude}")
 
-
                 dog = hashMapOf(
                     "name" to binding.etDogNameInputNewDog.text.toString(),
                     "favoriteTreat" to binding.etFavTreatInputNewDog.text.toString(),
                     "walkDate" to binding.etWalkDateInputNewDog.text.toString(),
                     "owner" to currentUser.displayName,
-                    "contact" to binding.etContactInputNewDog.text.toString(),
+                    "contact" to phoneNumber,
                     "imageSrc" to downloadUri,
                     "latitude" to it.latitude,
                     "longitude" to it.longitude,
@@ -150,3 +157,4 @@ class NewDogFragment: Fragment() {
         findNavController().navigate(action)
     }
 }
+

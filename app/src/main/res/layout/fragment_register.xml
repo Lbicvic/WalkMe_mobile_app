@@ -15,7 +15,9 @@
             android:id="@+id/et_firstname_input_register"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Enter first name" />
+            android:hint="Enter first name"
+            android:inputType="textPersonName|textCapWords"
+            />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_lastname_input_register"
@@ -29,7 +31,9 @@
             android:id="@+id/et_lastname_input_register"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Enter last name" />
+            android:hint="Enter last name"
+            android:inputType="textPersonName|textCapWords"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -44,7 +48,9 @@
             android:id="@+id/et_email_input_register"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Enter email" />
+            android:hint="Enter email"
+            android:inputType="textEmailAddress"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -59,7 +65,9 @@
             android:id="@+id/et_password_input_register"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Enter password" />
+            android:hint="Enter password"
+            android:inputType="textPassword"
+            />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_confirm_password_input_register"
@@ -73,7 +81,9 @@
             android:id="@+id/et_confirm_password_input_register"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Confirm password" />
+            android:hint="Confirm password"
+            android:inputType="textPassword"
+            />
     </com.google.android.material.textfield.TextInputLayout>
     <Button
         android:id="@+id/b_register"

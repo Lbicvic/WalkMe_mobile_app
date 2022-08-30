@@ -29,6 +29,7 @@ class LoginFragment: Fragment() {
     }
     private fun showDogListFragment() {
         if(binding.etEmailInputLogin.text.toString().isEmpty() || binding.etPasswordInputLogin.text.toString().isEmpty() ){
+            Toast.makeText(context, "Must fill empty fields", Toast.LENGTH_SHORT).show()
             return
         }
         auth.signInWithEmailAndPassword(binding.etEmailInputLogin.text.toString(), binding.etPasswordInputLogin.text.toString())

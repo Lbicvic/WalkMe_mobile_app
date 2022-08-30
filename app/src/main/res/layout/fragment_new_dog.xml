@@ -15,7 +15,9 @@
             android:id="@+id/et_dogName_input_newDog"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Enter dog name" />
+            android:hint="Enter dog name"
+            android:inputType="textPersonName|textCapWords"
+            />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_favTreat_input_newDog"
@@ -29,7 +31,9 @@
             android:id="@+id/et_favTreat_input_newDog"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Enter favorite treat" />
+            android:hint="Enter favorite treat"
+            android:inputType="textShortMessage"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -44,7 +48,9 @@
             android:id="@+id/et_walkDate_input_newDog"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Enter walk date" />
+            android:hint="Enter walk date"
+            android:inputType="date"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -59,17 +65,22 @@
             android:id="@+id/et_contact_input_newDog"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Enter contact" />
+            android:hint="Enter contact"
+            android:inputType="phone"
+            android:maxLength="13"
+            />
     </com.google.android.material.textfield.TextInputLayout>
     <ImageView
         android:id="@+id/iv_dog_picture_newDog"
-        android:scaleType="center"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
         android:src="@drawable/ic_launcher_background"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_contact_input_newDog"
+        app:layout_constraintBottom_toTopOf="@id/b_newDogPicture"
         />
     <Button
         android:id="@+id/b_newDogPicture"
@@ -77,20 +88,23 @@
         android:layout_height="wrap_content"
         android:text="Add Image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_dog_picture_newDog" />
+        app:layout_constraintBottom_toTopOf="@+id/b_uploadNewDogPicture"
+        />
     <Button
         android:id="@+id/b_uploadNewDogPicture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Upload Image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/b_newDogPicture" />
+        app:layout_constraintBottom_toTopOf="@id/b_newDog"
+        />
     <Button
         android:id="@+id/b_newDog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Post"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/b_uploadNewDogPicture" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

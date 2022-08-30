@@ -35,6 +35,7 @@ class RegisterFragment: Fragment() {
             binding.etEmailInputRegister.text.toString().isNullOrEmpty() || binding.etFirstnameInputRegister.text.toString().isNullOrEmpty() ||
             binding.etLastnameInputRegister.text.toString().isNullOrEmpty()
         ){
+            Toast.makeText(context, "Must fill empty fields or invalid password", Toast.LENGTH_SHORT).show()
             return
         }
         auth.createUserWithEmailAndPassword(binding.etEmailInputRegister.text.toString(), binding.etPasswordInputRegister.text.toString())

@@ -5,13 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
         android:id="@+id/iv_dog_picture_details"
-        android:scaleType="center"
         android:src="@drawable/ic_launcher_background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         />
     <TextView
         android:id="@+id/tv_dog_name_details"
@@ -30,6 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_dog_name_details"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_dog_walk_date_details"
         />
     <TextView
         android:id="@+id/tv_dog_walk_date_details"
@@ -39,6 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_dog_fav_treat_details"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_dog_owner_details"
         />
     <TextView
         android:id="@+id/tv_dog_owner_details"
@@ -48,22 +49,25 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_dog_walk_date_details"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_dog_contact_details"
         />
     <TextView
         android:id="@+id/tv_dog_contact_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Contact"
+        android:autoLink="phone"
         app:layout_constraintTop_toBottomOf="@+id/tv_dog_owner_details"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/location_btn"
         />
     <Button
         android:id="@+id/location_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View Location"
-        app:layout_constraintTop_toBottomOf="@+id/tv_dog_contact_details"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
