@@ -44,12 +44,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_favTreat_input_newDog">
 
-        <EditText
+        <DatePicker
             android:id="@+id/et_walkDate_input_newDog"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Enter walk date"
+            android:layout_height="130dp"
             android:inputType="date"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"
             />
     </com.google.android.material.textfield.TextInputLayout>
 

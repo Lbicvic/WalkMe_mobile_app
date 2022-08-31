@@ -10,14 +10,15 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.telephony.PhoneNumberUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -40,6 +41,7 @@ class NewDogFragment: Fragment() {
     lateinit var downloadUri: Uri
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     var formatter = DateTimeFormatter.ofPattern("ddMMyyyyHHmmssSSS")
+    var date : String = "Today"
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,6 +52,12 @@ class NewDogFragment: Fragment() {
         storageRef= FirebaseStorage.getInstance()
         binding = FragmentNewDogBinding.inflate(layoutInflater)
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(requireActivity())
+        var calendar = Calendar.getInstance()
+        binding.etWalkDateInputNewDog.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)){ view, year, month, day ->
+            val month = month + 1
+            date = "$day/$month/$year"
+        }
         binding.bNewDogPicture.setOnClickListener { choosePicture() }
         binding.bUploadNewDogPicture.setOnClickListener { uploadPicture() }
         binding.bNewDog.setOnClickListener{showDogListFragment()}
@@ -117,7 +125,7 @@ class NewDogFragment: Fragment() {
                 return
             }
             val phoneNumber : String = PhoneNumberUtils.formatNumberToE164(binding.etContactInputNewDog.text.toString(),"HR")
-            if(this::downloadUri.isInitialized.not() || binding.etDogNameInputNewDog.text.toString().isNullOrEmpty() || binding.etFavTreatInputNewDog.text.toString().isNullOrEmpty()  || binding.etWalkDateInputNewDog.text.toString().isNullOrEmpty() || binding.etContactInputNewDog.text.toString().isNullOrEmpty()){
+            if(this::downloadUri.isInitialized.not() || binding.etDogNameInputNewDog.text.toString().isNullOrEmpty() || binding.etFavTreatInputNewDog.text.toString().isNullOrEmpty()  || binding.etContactInputNewDog.text.toString().isNullOrEmpty()){
                 Toast.makeText(context, "Must fill empty input fields and add/upload picture", Toast.LENGTH_SHORT).show()
                 return
             }
@@ -135,7 +143,7 @@ class NewDogFragment: Fragment() {
                 dog = hashMapOf(
                     "name" to binding.etDogNameInputNewDog.text.toString(),
                     "favoriteTreat" to binding.etFavTreatInputNewDog.text.toString(),
-                    "walkDate" to binding.etWalkDateInputNewDog.text.toString(),
+                    "walkDate" to date,
                     "owner" to currentUser.displayName,
                     "contact" to phoneNumber,
                     "imageSrc" to downloadUri,
