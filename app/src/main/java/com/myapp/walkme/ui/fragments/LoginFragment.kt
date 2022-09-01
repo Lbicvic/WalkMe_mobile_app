@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.myapp.walkme.databinding.FragmentLoginBinding
 
 
-class LoginFragment: Fragment() {
+class LoginFragment : Fragment() {
     lateinit var binding: FragmentLoginBinding
     lateinit var auth: FirebaseAuth
     override fun onCreateView(
@@ -23,17 +23,21 @@ class LoginFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(layoutInflater)
-        auth=FirebaseAuth.getInstance()
-        binding.bLogin.setOnClickListener{showDogListFragment()}
+        auth = FirebaseAuth.getInstance()
+        binding.bLogin.setOnClickListener { showDogListFragment() }
         return binding.root
     }
+
     private fun showDogListFragment() {
-        if(binding.etEmailInputLogin.text.toString().isEmpty() || binding.etPasswordInputLogin.text.toString().isEmpty() ){
+        if (binding.etEmailInputLogin.text.toString().isEmpty()
+            || binding.etPasswordInputLogin.text.toString().isEmpty()) {
             Toast.makeText(context, "Must fill empty fields", Toast.LENGTH_SHORT).show()
             return
         }
-        auth.signInWithEmailAndPassword(binding.etEmailInputLogin.text.toString(), binding.etPasswordInputLogin.text.toString())
-            .addOnCompleteListener() { task ->
+        auth.signInWithEmailAndPassword(
+            binding.etEmailInputLogin.text.toString(),
+            binding.etPasswordInputLogin.text.toString()
+        ).addOnCompleteListener() { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
@@ -45,8 +49,10 @@ class LoginFragment: Fragment() {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
 
-                    Toast.makeText(context, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     updateUI(null)
                 }
             }

@@ -15,18 +15,20 @@ import com.myapp.walkme.R
 import com.myapp.walkme.databinding.ItemDogBinding
 import com.myapp.walkme.model.Dog
 
-class DogAdapter : RecyclerView.Adapter<DogViewHolder>(){
+class DogAdapter : RecyclerView.Adapter<DogViewHolder>() {
     var dogs = mutableListOf<Dog>()
     var onDogSelectedListener: OnDogSelectedListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_dog,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_dog, parent, false)
         return DogViewHolder(ItemDogBinding.bind(view))
     }
-    fun addDogs(dog : MutableList<Dog>){
+
+    fun addDogs(dog: MutableList<Dog>) {
         dogs.clear()
         dogs.addAll(dog)
         notifyDataSetChanged()
     }
+
     override fun onBindViewHolder(holder: DogViewHolder, position: Int) {
         val dog = dogs[position]
         holder.bind(dog)
@@ -42,10 +44,10 @@ class DogAdapter : RecyclerView.Adapter<DogViewHolder>(){
 
 }
 
-class DogViewHolder( val binding: ItemDogBinding) : RecyclerView.ViewHolder(binding.root){
-    fun bind(dog : Dog){
+class DogViewHolder(val binding: ItemDogBinding) : RecyclerView.ViewHolder(binding.root) {
+    fun bind(dog: Dog) {
         Glide.with(binding.root.context).load(Uri.parse(dog.imageSrc)).into(binding.itemDogImage)
-        binding.itemDogName.text="Name: ${dog.name}"
+        binding.itemDogName.text = "Name: ${dog.name}"
         binding.itemDogFavTreat.text = "Favorite treat: ${dog.favTreat}"
         binding.itemDogWalkDate.text = "Walk date: ${dog.walkDate}"
         binding.itemDogOwner.text = "Owner: ${dog.owner}"

@@ -16,14 +16,16 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
-        binding.loginBtn.setOnClickListener{showLoginFragment()}
-        binding.registerBtn.setOnClickListener{showRegisterFragment()}
+        binding.loginBtn.setOnClickListener { showLoginFragment() }
+        binding.registerBtn.setOnClickListener { showRegisterFragment() }
         return binding.root
     }
+
     private fun showLoginFragment() {
         val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
         findNavController().navigate(action)
     }
+
     private fun showRegisterFragment() {
         val action = HomeFragmentDirections.actionHomeFragmentToRegisterFragment()
         findNavController().navigate(action)

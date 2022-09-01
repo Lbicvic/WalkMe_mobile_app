@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_dogName_input_newDog"
         android:layout_width="match_parent"
@@ -16,9 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Enter dog name"
-            android:inputType="textPersonName|textCapWords"
-            />
+            android:inputType="textPersonName|textCapWords" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_favTreat_input_newDog"
         android:layout_width="match_parent"
@@ -32,27 +33,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Enter favorite treat"
-            android:inputType="textShortMessage"
-            />
+            android:inputType="textShortMessage|textCapWords" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_walkDate_input_newDog"
+
+    <DatePicker
+        android:id="@+id/dp_walkDate_input_newDog"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_height="130dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_favTreat_input_newDog">
+        app:layout_constraintTop_toBottomOf="@id/til_favTreat_input_newDog" />
 
-        <DatePicker
-            android:id="@+id/et_walkDate_input_newDog"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:inputType="date"
-            android:datePickerMode="spinner"
-            android:calendarViewShown="false"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_contact_input_newDog"
@@ -60,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_walkDate_input_newDog">
+        app:layout_constraintTop_toBottomOf="@+id/dp_walkDate_input_newDog">
 
         <EditText
             android:id="@+id/et_contact_input_newDog"
@@ -68,44 +62,43 @@
             android:layout_height="match_parent"
             android:hint="Enter contact"
             android:inputType="phone"
-            android:maxLength="13"
-            />
+            android:maxLength="13" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <ImageView
         android:id="@+id/iv_dog_picture_newDog"
-        android:scaleType="centerInside"
-        android:adjustViewBounds="true"
-        android:src="@drawable/ic_launcher_background"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toTopOf="@id/b_newDogPicture"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_contact_input_newDog"
-        app:layout_constraintBottom_toTopOf="@id/b_newDogPicture"
-        />
+        app:layout_constraintTop_toBottomOf="@id/til_contact_input_newDog" />
+
     <Button
         android:id="@+id/b_newDogPicture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Image"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/b_uploadNewDogPicture"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/b_uploadNewDogPicture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Upload Image"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/b_newDog"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/b_newDog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Post"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

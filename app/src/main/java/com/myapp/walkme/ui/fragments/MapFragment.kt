@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.myapp.walkme.R
 import com.myapp.walkme.databinding.FragmentMapBinding
 
-class MapFragment: Fragment(), OnMapReadyCallback {
+class MapFragment : Fragment(), OnMapReadyCallback {
     lateinit var binding: FragmentMapBinding
     private val args: MapFragmentArgs by navArgs()
     override fun onCreateView(
@@ -37,6 +37,6 @@ class MapFragment: Fragment(), OnMapReadyCallback {
                 .position(currentPosition)
                 .title("Dog Location")
         )
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentPosition,12f))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentPosition, 12f))
     }
 }

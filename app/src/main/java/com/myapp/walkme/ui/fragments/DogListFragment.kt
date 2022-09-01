@@ -29,7 +29,7 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
     ): View? {
         binding = FragmentDogListBinding.inflate(layoutInflater)
         db = FirebaseFirestore.getInstance()
-        auth= FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()
         setupRecyclerView()
         binding.addPostBtn.setOnClickListener { showNewDogFragment() }
         return binding.root
@@ -38,7 +38,7 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val currentUser = auth.currentUser
-        if(currentUser != null){
+        if (currentUser != null) {
             Log.d(TAG, "onViewCreated: RADI")
             val docRef = db.collection("dogs").orderBy("timestamp", Query.Direction.DESCENDING)
 
@@ -51,7 +51,8 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
                 if (snapshot != null) {
                     dogs.clear()
                     snapshot.documents.forEachIndexed { index, document ->
-                        val doggo = Dog( document.data?.getValue("imageSrc").toString(),
+                        val doggo = Dog(
+                            document.data?.getValue("imageSrc").toString(),
                             document.data?.getValue("name").toString(),
                             document.data?.getValue("favoriteTreat").toString(),
                             document.data?.getValue("walkDate").toString(),
@@ -67,6 +68,7 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
             }
         }
     }
+
     private fun setupRecyclerView() {
         binding.dogListRv.layoutManager = LinearLayoutManager(
             context, LinearLayoutManager.VERTICAL, false
@@ -75,6 +77,7 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
         adapter.onDogSelectedListener = this
         binding.dogListRv.adapter = adapter
     }
+
     override fun onDogSelected(position: Long) {
         val action =
             DogListFragmentDirections.actionDogListFragmentToDogDetailsFragment(position)
