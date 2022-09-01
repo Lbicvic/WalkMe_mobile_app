@@ -70,18 +70,30 @@ class NewDogFragment : Fragment() {
         progressDialog.show()
 
         val imagesRef = storageRef.getReference("images/" + UUID.randomUUID().toString())
+        if(!this::imageUri.isInitialized){
+            if (progressDialog.isShowing) {
+                progressDialog.dismiss()
+            }
+            Toast.makeText(
+                context,
+                "Must add a picture first",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
         var uploadTask = imagesRef.putFile(imageUri)
 
         uploadTask.addOnFailureListener {
             if (progressDialog.isShowing) {
                 progressDialog.dismiss()
             }
-            Log.w(TAG, "Upload failed!!!")
+            Toast.makeText(context, "Upload Failed! Try again", Toast.LENGTH_SHORT).show()
+
         }.addOnSuccessListener { taskSnapshot ->
             if (progressDialog.isShowing) {
                 progressDialog.dismiss()
             }
-            Log.w(TAG, "Upload successful!!!")
+            Toast.makeText(context, "Upload Successful!", Toast.LENGTH_SHORT).show()
         }.continueWithTask { task ->
             if (!task.isSuccessful) {
                 task.exception?.let {
@@ -117,12 +129,6 @@ class NewDogFragment : Fragment() {
         val currentUser = auth.currentUser
         var dog: HashMap<String, Comparable<*>?> = hashMapOf()
         if (currentUser != null) {
-            if (PhoneNumberUtils.formatNumberToE164(binding.etContactInputNewDog.text.toString(), "HR") == null
-            ) {
-                Toast.makeText(context, "Invalid Phone Number", Toast.LENGTH_SHORT).show()
-                return
-            }
-            val phoneNumber: String = PhoneNumberUtils.formatNumberToE164(binding.etContactInputNewDog.text.toString(), "HR")
             if (this::downloadUri.isInitialized.not() || binding.etDogNameInputNewDog.text.toString()
                     .isNullOrEmpty() || binding.etFavTreatInputNewDog.text.toString()
                     .isNullOrEmpty() || binding.etContactInputNewDog.text.toString().isNullOrEmpty()
@@ -134,6 +140,13 @@ class NewDogFragment : Fragment() {
                 ).show()
                 return
             }
+            if (PhoneNumberUtils.formatNumberToE164(binding.etContactInputNewDog.text.toString(), "HR") == null
+            ) {
+                Toast.makeText(context, "Invalid Phone Number", Toast.LENGTH_SHORT).show()
+                return
+            }
+            val phoneNumber: String = PhoneNumberUtils.formatNumberToE164(binding.etContactInputNewDog.text.toString(), "HR")
+
             if (PhoneNumberUtils.isGlobalPhoneNumber(binding.etContactInputNewDog.text.toString()).not()
             ) {
                 Toast.makeText(context, "Invalid Global Phone Number", Toast.LENGTH_SHORT).show()
