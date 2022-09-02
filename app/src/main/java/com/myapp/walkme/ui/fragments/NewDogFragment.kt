@@ -38,6 +38,7 @@ class NewDogFragment : Fragment() {
     lateinit var downloadUri: Uri
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     var date: String = "Today"
+    val documentID = UUID.randomUUID().toString()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -69,7 +70,7 @@ class NewDogFragment : Fragment() {
         progressDialog.setCancelable(false)
         progressDialog.show()
 
-        val imagesRef = storageRef.getReference("images/" + UUID.randomUUID().toString())
+        val imagesRef = storageRef.getReference("images/$documentID")
         if(!this::imageUri.isInitialized){
             if (progressDialog.isShowing) {
                 progressDialog.dismiss()
@@ -127,7 +128,6 @@ class NewDogFragment : Fragment() {
     @SuppressLint("MissingPermission")
     private fun showDogListFragment() {
         val currentUser = auth.currentUser
-        val documentID = UUID.randomUUID().toString()
         var dog: HashMap<String, Comparable<*>?> = hashMapOf()
         if (currentUser != null) {
             if (this::downloadUri.isInitialized.not() || binding.etDogNameInputNewDog.text.toString()

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.storage.FirebaseStorage
 import com.myapp.walkme.databinding.FragmentDogListBinding
 import com.myapp.walkme.model.Dog
 
@@ -23,6 +24,7 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
     lateinit var adapter: DogAdapter
     lateinit var auth: FirebaseAuth
     lateinit var db: FirebaseFirestore
+    lateinit var firebaseStorage: FirebaseStorage
     var dogs = mutableListOf<Dog>()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +34,7 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
         binding = FragmentDogListBinding.inflate(layoutInflater)
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
+        firebaseStorage = FirebaseStorage.getInstance()
         setupRecyclerView()
         binding.addPostBtn.setOnClickListener { showNewDogFragment() }
         return binding.root
@@ -52,7 +55,7 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
 
                 if (snapshot != null) {
                     dogs.clear()
-                    snapshot.documents.forEachIndexed { index, document ->
+                    snapshot.documents.forEach { document ->
                         val doggo = Dog(
                             document.data?.getValue("imageSrc").toString(),
                             document.data?.getValue("name").toString(),
@@ -101,6 +104,13 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
                         dog?.let {
                             snapshot.documents.forEach { document ->
                                 if(it.id == document.id && currentUser.uid == document.data?.getValue("userID").toString()){
+                                    val dogimageRef = firebaseStorage.getReference("images/" + document.id)
+                                    dogimageRef.delete().addOnSuccessListener {
+                                        Toast.makeText(context, "Dog Image Successfully Deleted", Toast.LENGTH_SHORT).show()
+                                    }.addOnFailureListener {
+                                        Toast.makeText(context, "Error deleting Dog Image", Toast.LENGTH_SHORT).show()
+                                        Log.d(TAG, "SLIKA NECE ${document.id}")
+                                    }
                                     db.collection("dogs").document(document.id)
                                         .delete()
                                         .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!")
