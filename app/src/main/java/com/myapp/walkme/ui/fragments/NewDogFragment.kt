@@ -127,6 +127,7 @@ class NewDogFragment : Fragment() {
     @SuppressLint("MissingPermission")
     private fun showDogListFragment() {
         val currentUser = auth.currentUser
+        val documentID = UUID.randomUUID().toString()
         var dog: HashMap<String, Comparable<*>?> = hashMapOf()
         if (currentUser != null) {
             if (this::downloadUri.isInitialized.not() || binding.etDogNameInputNewDog.text.toString()
@@ -179,13 +180,13 @@ class NewDogFragment : Fragment() {
                     "imageSrc" to downloadUri,
                     "latitude" to it.latitude,
                     "longitude" to it.longitude,
-                    "timestamp" to ZonedDateTime.now().toInstant().toEpochMilli()
+                    "timestamp" to ZonedDateTime.now().toInstant().toEpochMilli(),
+                    "userID" to currentUser.uid
                 )
 
-                db.collection("dogs")
-                    .add(dog)
+                db.collection("dogs").document(documentID).set(dog)
                     .addOnSuccessListener { documentReference ->
-                        Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                        Log.w(TAG, "Document added to dogs")
                     }
                     .addOnFailureListener { e ->
                         Log.w(TAG, "Error adding document", e)

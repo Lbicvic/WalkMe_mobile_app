@@ -7,8 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -57,11 +59,12 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
                             document.data?.getValue("favoriteTreat").toString(),
                             document.data?.getValue("walkDate").toString(),
                             document.data?.getValue("owner").toString(),
-                            document.data?.getValue("contact").toString()
+                            document.data?.getValue("contact").toString(),
+                            document.id
                         )
                         dogs.add(doggo)
-                        adapter.addDogs(dogs)
                     }
+                    adapter.addDogs(dogs)
                 } else {
                     Log.d(TAG, "Current data: null")
                 }
@@ -82,6 +85,41 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
         val action =
             DogListFragmentDirections.actionDogListFragmentToDogDetailsFragment(position)
         findNavController().navigate(action)
+    }
+
+    override fun onDogLongPress(dog: Dog?): Boolean {
+        val currentUser = auth.currentUser
+        if(currentUser != null){
+                val docRef = db.collection("dogs").orderBy("timestamp", Query.Direction.DESCENDING)
+
+                docRef.addSnapshotListener { snapshot, e ->
+                    if (e != null) {
+                        Log.w(TAG, "Listen failed.", e)
+                        return@addSnapshotListener
+                    }
+                    if (snapshot != null) {
+                        dog?.let {
+                            snapshot.documents.forEach { document ->
+                                if(it.id == document.id && currentUser.uid == document.data?.getValue("userID").toString()){
+                                    db.collection("dogs").document(document.id)
+                                        .delete()
+                                        .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!")
+                                            Toast.makeText(context, "Dog Successfully Deleted", Toast.LENGTH_SHORT).show()
+                                        }
+                                        .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e)
+                                            Toast.makeText(context, "Error deleting dog", Toast.LENGTH_SHORT).show()
+                                        }
+                                    dogs.remove(it)
+                                    adapter.addDogs(dogs)
+                                }
+                            }
+                        }
+                    } else {
+                        Log.d(TAG, "Current data: null")
+                    }
+                }
+        }
+        return true
     }
 
     private fun showNewDogFragment() {

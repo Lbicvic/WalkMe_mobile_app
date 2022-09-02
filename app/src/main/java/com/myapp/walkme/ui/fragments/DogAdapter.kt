@@ -34,6 +34,7 @@ class DogAdapter : RecyclerView.Adapter<DogViewHolder>() {
         holder.bind(dog)
         onDogSelectedListener?.let { listener ->
             holder.itemView.setOnClickListener { listener.onDogSelected(position.toLong()) }
+            holder.itemView.setOnLongClickListener { listener.onDogLongPress(dog) }
         }
     }
 
