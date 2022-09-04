@@ -64,47 +64,64 @@ class NewDogFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("MissingPermission")
     fun uploadPicture() {
-        val progressDialog = ProgressDialog(this.context)
-        progressDialog.setMessage("Uploading...")
-        progressDialog.setCancelable(false)
-        progressDialog.show()
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                101
+            )
+        } else{
+            val progressDialog = ProgressDialog(this.context)
+            progressDialog.setMessage("Uploading...")
+            progressDialog.setCancelable(false)
+            progressDialog.show()
 
-        val imagesRef = storageRef.getReference("images/$documentID")
-        if(!this::imageUri.isInitialized){
-            if (progressDialog.isShowing) {
-                progressDialog.dismiss()
-            }
-            Toast.makeText(
-                context,
-                "Must add a picture first",
-                Toast.LENGTH_SHORT
-            ).show()
-            return
-        }
-        var uploadTask = imagesRef.putFile(imageUri)
-
-        uploadTask.addOnFailureListener {
-            if (progressDialog.isShowing) {
-                progressDialog.dismiss()
-            }
-            Toast.makeText(context, "Upload Failed! Try again", Toast.LENGTH_SHORT).show()
-
-        }.addOnSuccessListener { taskSnapshot ->
-            if (progressDialog.isShowing) {
-                progressDialog.dismiss()
-            }
-            Toast.makeText(context, "Upload Successful!", Toast.LENGTH_SHORT).show()
-        }.continueWithTask { task ->
-            if (!task.isSuccessful) {
-                task.exception?.let {
-                    throw it
+            val imagesRef = storageRef.getReference("images/$documentID")
+            if(!this::imageUri.isInitialized){
+                if (progressDialog.isShowing) {
+                    progressDialog.dismiss()
                 }
+                Toast.makeText(
+                    context,
+                    "Must add a picture first",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return
             }
-            imagesRef.downloadUrl
-        }.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                downloadUri = task.result
+            var uploadTask = imagesRef.putFile(imageUri)
+
+            uploadTask.addOnFailureListener {
+                if (progressDialog.isShowing) {
+                    progressDialog.dismiss()
+                }
+                Toast.makeText(context, "Upload Failed! Try again", Toast.LENGTH_SHORT).show()
+
+            }.addOnSuccessListener { taskSnapshot ->
+                if (progressDialog.isShowing) {
+                    progressDialog.dismiss()
+                }
+                Toast.makeText(context, "Upload Successful!", Toast.LENGTH_SHORT).show()
+            }.continueWithTask { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+                    }
+                }
+                imagesRef.downloadUrl
+            }.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    downloadUri = task.result
+                }
             }
         }
     }
@@ -153,21 +170,7 @@ class NewDogFragment : Fragment() {
                 Toast.makeText(context, "Invalid Global Phone Number", Toast.LENGTH_SHORT).show()
                 return
             }
-            if (ActivityCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                ActivityCompat.requestPermissions(
-                    requireActivity(),
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                    101
-                )
-            }
+
             fusedLocationProviderClient.lastLocation.addOnSuccessListener {
                 Log.w(TAG, "${it.latitude} and ${it.longitude}")
 
