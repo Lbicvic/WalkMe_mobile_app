@@ -50,8 +50,8 @@ class DogDetailsFragment: Fragment() {
                     return@addSnapshotListener
                 }
 
-                if (snapshot != null) {
-                    Glide.with(binding.root.context).load(Uri.parse(snapshot.documents[args.position.toInt()].data?.getValue("imageSrc").toString())).into(binding.ivDogPictureDetails)
+                if (snapshot != null && context != null) {
+                    Glide.with(requireContext()).load(Uri.parse(snapshot.documents[args.position.toInt()].data?.getValue("imageSrc").toString())).into(binding.ivDogPictureDetails)
                         binding.tvDogNameDetails.text ="Name: ${snapshot.documents[args.position.toInt()].data?.getValue("name").toString()}"
                         binding.tvDogFavTreatDetails.text = "Favorite treat: ${snapshot.documents[args.position.toInt()].data?.getValue("favoriteTreat").toString()}"
                         binding.tvDogWalkDateDetails.text = "Walk date: ${snapshot.documents[args.position.toInt()].data?.getValue("walkDate").toString()}"

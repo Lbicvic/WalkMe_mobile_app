@@ -106,10 +106,9 @@ class DogListFragment : Fragment(), OnDogSelectedListener {
                                 if(it.id == document.id && currentUser.uid == document.data?.getValue("userID").toString()){
                                     val dogimageRef = firebaseStorage.getReference("images/" + document.id)
                                     dogimageRef.delete().addOnSuccessListener {
-                                        Toast.makeText(context, "Dog Image Successfully Deleted", Toast.LENGTH_SHORT).show()
+
                                     }.addOnFailureListener {
                                         Toast.makeText(context, "Error deleting Dog Image", Toast.LENGTH_SHORT).show()
-                                        Log.d(TAG, "SLIKA NECE ${document.id}")
                                     }
                                     db.collection("dogs").document(document.id)
                                         .delete()
